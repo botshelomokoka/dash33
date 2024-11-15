@@ -253,6 +253,56 @@ def create_app() -> Optional[FastAPI]:
                 detail=str(e)
             )
 
+    @app.get("/api/v1/dashboard/{wallet_id}")
+    async def get_dashboard_data(wallet_id: str, token: Optional[str] = Depends(security)):
+        """Get complete dashboard data for a wallet"""
+        try:
+            wallet_manager = WalletManager()
+            wallet_info = wallet_manager.get_wallet_info(wallet_id)
+            
+            if not wallet_info:
+                raise HTTPException(
+                    status_code=404,
+                    detail="Wallet not found"
+                )
+                
+            # Get transaction analysis
+            analyzer = TransactionAnalyzer()
+            analysis = analyzer.analyze_transactions(wallet_info.transactions)
+            
+            # Prepare dashboard response
+            dashboard_data = {
+                "wallet_info": {
+                    "address": wallet_info.address,
+                    "balance": wallet_info.balance,
+                    "transactions": wallet_info.transactions
+                },
+                "analysis": {
+                    "risk_score": analysis.risk_score,
+                    "recommendations": analysis.recommendations,
+                    "predicted_trends": analysis.predicted_trends
+                }
+            }
+            
+            # Add Lightning data if available
+            if wallet_info.lightning_info:
+                dashboard_data["lightning_status"] = wallet_info.lightning_info
+                
+            # Add Web5 data if available
+            if hasattr(wallet_info, 'web5_enabled') and wallet_info.web5_enabled:
+                dashboard_data["web5_status"] = {
+                    "did": wallet_info.did,
+                    "protocols": web5.get_protocols()
+                }
+                
+            return dashboard_data
+            
+        except Exception as e:
+            raise HTTPException(
+                status_code=500,
+                detail=str(e)
+            )
+
     return app
 
 def start_server(
