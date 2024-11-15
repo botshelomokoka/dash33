@@ -4,6 +4,7 @@ from fastapi.responses import HTMLResponse
 from fastapi.middleware.cors import CORSMiddleware
 import uvicorn
 from pathlib import Path
+from ..agents.finance import FinanceAgent
 
 # Initialize FastAPI app
 app = FastAPI(
@@ -97,6 +98,38 @@ async def wallet_status():
             "dlc"
         ]
     }
+
+@app.get("/api/v1/market/analysis/{symbol}")
+async def get_market_analysis(symbol: str):
+    """Get market analysis for a symbol"""
+    try:
+        finance_agent = FinanceAgent()
+        analysis = await finance_agent.analyze_asset(symbol)
+        return {
+            "status": "success",
+            "data": analysis
+        }
+    except Exception as e:
+        raise HTTPException(
+            status_code=500,
+            detail=str(e)
+        )
+
+@app.get("/api/v1/market/update")
+async def get_market_update():
+    """Get general market update"""
+    try:
+        finance_agent = FinanceAgent()
+        update = await finance_agent.get_market_update()
+        return {
+            "status": "success",
+            "data": update
+        }
+    except Exception as e:
+        raise HTTPException(
+            status_code=500,
+            detail=str(e)
+        )
 
 def start_server():
     """Start the uvicorn server"""
