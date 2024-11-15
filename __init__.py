@@ -6,12 +6,14 @@ import os
 import sys
 from typing import List
 
-# Required packages
+# Required packages with Web5 support
 REQUIRED_PACKAGES = {
     'bitcoin': 'python-bitcoinlib',
     'numpy': 'numpy',
     'fastapi': 'fastapi',
-    'uvicorn': 'uvicorn'
+    'uvicorn': 'uvicorn',
+    'web5': 'web5',
+    'did_resolver': 'did-resolver'
 }
 
 def check_dependencies() -> List[str]:
@@ -19,7 +21,7 @@ def check_dependencies() -> List[str]:
     missing = []
     for module, package in REQUIRED_PACKAGES.items():
         try:
-            __import__(module)
+            __import__(module.replace('_', '-'))
         except ImportError:
             missing.append(package)
     return missing
@@ -38,8 +40,14 @@ if package_root not in sys.path:
 from .wallet.wallet_manager import WalletManager
 from .ai.analyzer import TransactionAnalyzer
 from .config import DashboardConfig
+from .web.main import create_app
 
 __version__ = "0.1.0"
 __package_name__ = "33dash"
 
-__all__ = ['WalletManager', 'TransactionAnalyzer', 'DashboardConfig'] 
+__all__ = [
+    'WalletManager', 
+    'TransactionAnalyzer', 
+    'DashboardConfig',
+    'create_app'
+] 
