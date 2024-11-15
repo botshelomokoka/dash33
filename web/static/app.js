@@ -1,67 +1,92 @@
-function Dashboard() {
-    const [walletId, setWalletId] = React.useState('');
-    const [analysis, setAnalysis] = React.useState(null);
-    const [error, setError] = React.useState(null);
+import { createDashboard } from './components/Dashboard.js';
+import { WalletManager } from './services/WalletManager.js';
+import { AnalyticsService } from './services/AnalyticsService.js';
 
-    const connectWallet = async () => {
+class FinancialDashboard {
+    constructor() {
+        this.walletManager = new WalletManager();
+        this.analyticsService = new AnalyticsService();
+        this.state = {
+            walletConnected: false,
+            loading: false,
+            error: null,
+            data: null
+        };
+    }
+
+    async init() {
         try {
-            const response = await fetch(`/api/wallet/connect/${walletId}`, {
-                method: 'POST'
-            });
-            if (!response.ok) throw new Error('Failed to connect wallet');
-            getAnalysis();
-        } catch (err) {
-            setError(err.message);
+            await this.checkWalletConnection();
+            this.render();
+            this.setupEventListeners();
+        } catch (error) {
+            console.error('Dashboard initialization failed:', error);
+            this.setState({ error: error.message });
         }
-    };
+    }
 
-    const getAnalysis = async () => {
+    async checkWalletConnection() {
         try {
-            const response = await fetch(`/api/wallet/${walletId}/analysis`);
-            if (!response.ok) throw new Error('Failed to get analysis');
-            const data = await response.json();
-            setAnalysis(data);
-        } catch (err) {
-            setError(err.message);
+            const status = await this.walletManager.checkConnection();
+            this.setState({ walletConnected: status.connected });
+            if (status.connected) {
+                await this.fetchDashboardData();
+            }
+        } catch (error) {
+            console.error('Wallet connection check failed:', error);
         }
-    };
+    }
 
-    return (
-        <div className="dashboard">
-            <h1>33dash Bitcoin Dashboard</h1>
+    async fetchDashboardData() {
+        this.setState({ loading: true });
+        try {
+            const walletData = await this.walletManager.getWalletInfo();
+            const analytics = await this.analyticsService.analyzeTransactions(
+                walletData.transactions
+            );
             
-            <div className="wallet-form">
-                <input 
-                    type="text" 
-                    value={walletId} 
-                    onChange={(e) => setWalletId(e.target.value)}
-                    placeholder="Enter wallet ID"
-                />
-                <button onClick={connectWallet}>Connect Wallet</button>
-            </div>
+            this.setState({
+                data: {
+                    wallet: walletData,
+                    analytics: analytics
+                },
+                loading: false
+            });
+        } catch (error) {
+            this.setState({
+                error: 'Failed to fetch dashboard data',
+                loading: false
+            });
+        }
+    }
 
-            {error && <div className="error">{error}</div>}
+    setState(newState) {
+        this.state = { ...this.state, ...newState };
+        this.render();
+    }
 
-            {analysis && (
-                <div className="analysis">
-                    <h2>Analysis Results</h2>
-                    <p>Risk Score: {analysis.risk_score}</p>
-                    <h3>Recommendations:</h3>
-                    <ul>
-                        {analysis.recommendations.map((rec, i) => (
-                            <li key={i}>{rec}</li>
-                        ))}
-                    </ul>
-                    <h3>Predicted Trends:</h3>
-                    <ul>
-                        {Object.entries(analysis.predicted_trends).map(([trend, value]) => (
-                            <li key={trend}>{trend}: {value}</li>
-                        ))}
-                    </ul>
-                </div>
-            )}
-        </div>
-    );
+    setupEventListeners() {
+        document.addEventListener('wallet-connected', async () => {
+            await this.fetchDashboardData();
+        });
+
+        document.addEventListener('refresh-data', async () => {
+            await this.fetchDashboardData();
+        });
+    }
+
+    render() {
+        const rootElement = document.getElementById('root');
+        createDashboard(rootElement, {
+            ...this.state,
+            onConnect: () => this.walletManager.connect(),
+            onRefresh: () => this.fetchDashboardData()
+        });
+    }
 }
 
-ReactDOM.render(<Dashboard />, document.getElementById('root')); 
+// Initialize dashboard when DOM is loaded
+document.addEventListener('DOMContentLoaded', () => {
+    const dashboard = new FinancialDashboard();
+    dashboard.init();
+}); 
