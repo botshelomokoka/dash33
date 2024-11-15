@@ -32,22 +32,21 @@ if missing_packages:
     print(f"Warning: Missing required packages: {', '.join(missing_packages)}")
     print("Install them using: pip install " + " ".join(missing_packages))
 
-# Add the package root to the Python path
-package_root = os.path.abspath(os.path.dirname(os.path.dirname(__file__)))
-if package_root not in sys.path:
-    sys.path.insert(0, package_root)
+__version__ = "0.1.0"
 
+# Import core components
 from .wallet.wallet_manager import WalletManager
 from .ai.analyzer import TransactionAnalyzer
 from .config import DashboardConfig
 from .web.main import create_app
 
-__version__ = "0.1.0"
-__package_name__ = "33dash"
+# Create FastAPI app instance
+app = create_app()
 
 __all__ = [
-    'WalletManager', 
+    'WalletManager',
     'TransactionAnalyzer', 
     'DashboardConfig',
+    'app',
     'create_app'
 ] 
