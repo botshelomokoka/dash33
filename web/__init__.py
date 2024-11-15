@@ -1,4 +1,5 @@
 """Web dashboard package for 33dash"""
-from .main import start_server
+from .main import create_app, start_server
+from .scripts.web import main as cli_main
 
-__all__ = ['start_server'] 
+__all__ = ['create_app', 'start_server', 'cli_main'] 
