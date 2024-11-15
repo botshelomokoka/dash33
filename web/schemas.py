@@ -1,5 +1,5 @@
 from pydantic import BaseModel, Field, validator
-from typing import Optional, List, Dict, Any
+from typing import Optional, Dict, Any
 from enum import Enum
 
 class WalletType(str, Enum):
@@ -7,17 +7,11 @@ class WalletType(str, Enum):
     LIGHTNING = "lightning"
     WEB5 = "web5"
 
-class LightningConfig(BaseModel):
-    node_uri: str = Field(..., description="Lightning node URI")
-    macaroon: str = Field(..., description="Node macaroon for authentication")
-    network: str = Field(default="mainnet", regex="^(mainnet|testnet)$")
-    
 class WalletConnect(BaseModel):
     wallet_id: str = Field(..., min_length=26, max_length=35)
     wallet_type: WalletType = Field(default=WalletType.BITCOIN)
     web5_did: Optional[str] = Field(None, regex=r"^did:")
-    lightning_config: Optional[LightningConfig] = None
-    
+
     @validator('web5_did')
     def validate_web5_did(cls, v, values):
         if values.get('wallet_type') == WalletType.WEB5 and not v:
