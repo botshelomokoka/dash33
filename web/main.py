@@ -29,7 +29,10 @@ def create_app():
 
     return app
 
-app = create_app()
+from fastapi import FastAPI
+from fastapi.responses import JSONResponse
+
+app = FastAPI()
 
 # Mount static files
 static_dir = os.path.join(os.path.dirname(__file__), "static")
