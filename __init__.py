@@ -6,14 +6,13 @@ import os
 import sys
 from typing import List
 
-# Required packages with Web5 support
+# Required packages
 REQUIRED_PACKAGES = {
     'bitcoin': 'python-bitcoinlib',
     'numpy': 'numpy',
     'fastapi': 'fastapi',
     'uvicorn': 'uvicorn',
-    'web5': 'web5',
-    'did_resolver': 'did-resolver'
+    'httpx': 'httpx'
 }
 
 def check_dependencies() -> List[str]:
@@ -21,7 +20,7 @@ def check_dependencies() -> List[str]:
     missing = []
     for module, package in REQUIRED_PACKAGES.items():
         try:
-            __import__(module.replace('_', '-'))
+            __import__(module)
         except ImportError:
             missing.append(package)
     return missing
@@ -37,10 +36,13 @@ package_root = os.path.abspath(os.path.dirname(os.path.dirname(__file__)))
 if package_root not in sys.path:
     sys.path.insert(0, package_root)
 
-from .wallet.wallet_manager import WalletManager
-from .ai.analyzer import TransactionAnalyzer
-from .config import DashboardConfig
-from .web.main import create_app
+try:
+    from .wallet.wallet_manager import WalletManager
+    from .ai.analyzer import TransactionAnalyzer
+    from .config import DashboardConfig
+    from .web.main import create_app
+except ImportError as e:
+    print(f"Warning: Some features may be limited. Error: {e}")
 
 __version__ = "0.1.0"
 __package_name__ = "33dash"
