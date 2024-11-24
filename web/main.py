@@ -10,29 +10,41 @@ except ImportError:
 
 import os
 from pathlib import Path
+from fastapi import FastAPI
+import uvicorn
 
-def create_app():
+def create_app() -> FastAPI:
     """Create and configure the FastAPI application"""
-    if not FASTAPI_AVAILABLE:
-        return None
-
     app = FastAPI(title="33dash")
-    
-    # Configure CORS
-    app.add_middleware(
-        CORSMiddleware,
-        allow_origins=["*"],
-        allow_credentials=True,
-        allow_methods=["*"],
-        allow_headers=["*"],
-    )
+
+    @app.get("/api/v1/health")
+    async def health_check():
+        return {"status": "healthy"}
+
+    @app.get("/api/v1/wallet/status")
+    async def wallet_status():
+        return {
+            "status": "ready",
+            "network": "mainnet",
+            "features": [
+                "bitcoin",
+                "lightning",
+                "rgb",
+                "dlc"
+            ],
+            "ai_enabled": True
+        }
 
     return app
 
-from fastapi import FastAPI
-from fastapi.responses import JSONResponse
+def start_server(host: str = "0.0.0.0", port: int = 8000, reload: bool = False):
+    """Start the FastAPI server"""
+    app = create_app()
+    uvicorn.run(app, host=host, port=port, reload=reload)
 
-app = FastAPI()
+# Only start server if file is run directly
+if __name__ == "__main__":
+    start_server()
 
 # Mount static files
 static_dir = os.path.join(os.path.dirname(__file__), "static")
