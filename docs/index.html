@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>dash33 Documentation</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css">
+    <style>
+        :root {
+            --primary: #1e88e5;
+            --primary-hover: #1976d2;
+        }
+        .container {
+            padding: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .hero {
+            text-align: center;
+            padding: 4rem 0;
+            background: var(--primary);
+            color: white;
+            margin-bottom: 2rem;
+        }
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+        .feature-card {
+            padding: 1.5rem;
+            border-radius: 8px;
+            background: var(--card-background-color);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+    </style>
+</head>
+<body>
+    <div class="hero">
+        <div class="container">
+            <h1>dash33</h1>
+            <p>A comprehensive Bitcoin intelligence platform powered by AI</p>
+        </div>
+    </div>
+
+    <main class="container">
+        <section>
+            <h2>Overview</h2>
+            <p>dash33 is an advanced Bitcoin dashboard that combines AI-powered analytics with multi-layer Bitcoin wallet integration. 
+               It provides real-time financial intelligence and insights across the Bitcoin network, offering a unified view of all 
+               activities and investments through a modern web interface and CLI.</p>
+        </section>
+
+        <section class="features">
+            <div class="feature-card">
+                <h3>🔒 Wallet Integration</h3>
+                <p>Secure multi-wallet connection support with real-time transaction monitoring and cross-layer Bitcoin activity tracking.</p>
+            </div>
+            <div class="feature-card">
+                <h3>🤖 AI Analytics</h3>
+                <p>Advanced transaction pattern analysis, investment trend visualization, and predictive insights using transformer models.</p>
+            </div>
+            <div class="feature-card">
+                <h3>💻 CLI Interface</h3>
+                <p>Interactive AI-powered command interface with transaction optimization suggestions and custom scripting support.</p>
+            </div>
+        </section>
+
+        <section>
+            <h2>Getting Started</h2>
+            <pre><code>
+# Clone the repository
+git clone https://github.com/botshelomokoka/dash33.git
+cd dash33
+
+# Install dependencies
+pip install -r requirements.txt
+
+# Run the dashboard
+uvicorn web.main:app --reload
+            </code></pre>
+        </section>
+
+        <section>
+            <h2>Documentation</h2>
+            <ul>
+                <li><a href="api/">API Reference</a></li>
+                <li><a href="guides/">User Guides</a></li>
+                <li><a href="https://github.com/botshelomokoka/dash33">GitHub Repository</a></li>
+            </ul>
+        </section>
+    </main>
+
+    <footer class="container">
+        <hr>
+        <p>© 2024 dash33. Licensed under MIT.</p>
+    </footer>
+</body>
+</html>
