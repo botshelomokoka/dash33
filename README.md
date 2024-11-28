@@ -2,10 +2,13 @@
 A comprehensive Bitcoin intelligence platform powered by AI
 
 [![GitHub](https://img.shields.io/badge/GitHub-dash33-blue?style=flat&logo=github)](https://github.com/botshelomokoka/dash33/)
+[![Documentation](https://img.shields.io/badge/docs-GitHub%20Pages-blue)](https://botshelomokoka.github.com.io/dash33)
 [![License](https://img.shields.io/badge/License-MIT-green.svg)](https://github.com/botshelomokoka/dash33/blob/main/LICENSE)
 
 ## Overview
 dash33 is an advanced Bitcoin dashboard that combines AI-powered analytics with multi-layer Bitcoin wallet integration. It provides real-time financial intelligence and insights across the Bitcoin network, offering a unified view of all activities and investments through a modern web interface and CLI.
+
+📚 **[View Full Documentation](https://botshelomokoka.github.com.io/dash33)**
 
 ## Quick Start
 ```bash
