@@ -1,100 +1,88 @@
-# dash33
-A comprehensive Bitcoin intelligence platform powered by AI
+# dash33: Bitcoin Intelligence Platform
 
-[![GitHub](https://img.shields.io/badge/GitHub-dash33-blue?style=flat&logo=github)](https://github.com/botshelomokoka/dash33/)
-[![Documentation](https://img.shields.io/badge/docs-GitHub%20Pages-blue)](https://botshelomokoka.github.com.io/dash33)
-[![License](https://img.shields.io/badge/License-MIT-green.svg)](https://github.com/botshelomokoka/dash33/blob/main/LICENSE)
+[![Documentation](https://img.shields.io/badge/docs-latest-blue.svg)](https://botshelomokoka.github.io/dash33)
+[![Tests](https://github.com/botshelomokoka/dash33/workflows/tests/badge.svg)](https://github.com/botshelomokoka/dash33/actions)
+[![Performance](https://img.shields.io/badge/performance-optimized-green.svg)](https://github.com/botshelomokoka/dash33/blob/main/PERFORMANCE.md)
 
 ## Overview
-dash33 is an advanced Bitcoin dashboard that combines AI-powered analytics with multi-layer Bitcoin wallet integration. It provides real-time financial intelligence and insights across the Bitcoin network, offering a unified view of all activities and investments through a modern web interface and CLI.
 
-📚 **[View Full Documentation](https://botshelomokoka.github.com.io/dash33)**
-
-## Quick Start
-```bash
-# Clone the repository
-git clone https://github.com/botshelomokoka/dash33.git
-cd dash33
-
-# Install dependencies
-pip install -r requirements.txt
-
-# Run the dashboard
-uvicorn web.main:app --reload
-```
-
-## Technical Stack
-- **Backend**: Python FastAPI, Python-bitcoinlib
-- **AI/ML**: PyTorch, Scikit-learn, Transformers
-- **Web Dashboard**: FastAPI, Uvicorn, Jinja2
-- **Monitoring**: OpenTelemetry, Prometheus
-- **Security**: JWT authentication, BCrypt password hashing
+dash33 is a comprehensive Bitcoin intelligence platform that combines advanced AI analytics with secure wallet management. It provides real-time insights, transaction analysis, and portfolio optimization through a modern, secure interface.
 
 ## Features
-1. **Wallet Integration**: 
-   - Secure multi-wallet connection support
-   - Real-time transaction monitoring
-   - Cross-layer Bitcoin activity tracking
 
-2. **AI Analytics Engine**:
-   - Transaction pattern analysis
-   - Investment trend visualization
-   - Predictive insights using transformer models
+### AI Analytics
+- Deep learning-based transaction analysis
+- Real-time anomaly detection
+- Portfolio optimization
+- Market trend forecasting
 
-3. **Financial Intelligence CLI**: 
-   - Interactive AI-powered command interface
-   - Transaction optimization suggestions
-   - Custom scripting support
+### Wallet Security
+- Multi-signature support
+- Hardware wallet integration
+- Advanced encryption
+- Secure key management
 
-4. **ML Pipeline**:
-   - Integration with open-source ML models
-   - Customizable training parameters
-   - Real-time model adjustments
+### Network Security
+- TLS certificate management
+- DDoS protection
+- Rate limiting
+- Secure API endpoints
 
-5. **Web Dashboard**:
-   - Responsive modern interface
-   - Real-time data visualization
-   - Secure API endpoints
+## Performance Optimizations
 
-## Project Structure
+### AI/ML Optimizations
+- Batch processing for efficient computation
+- Model quantization and JIT compilation
+- GPU acceleration when available
+- Cached preprocessing operations
+
+### Data Processing
+- Async operations with caching
+- Optimized numpy operations
+- Efficient memory management
+- Batched database operations
+
+## Quick Start
+
+1. Install dependencies:
+```bash
+pip install -r requirements.txt
 ```
-dash33/
-├── agents/     # AI agents for automated analysis
-├── ai/         # Machine learning models and training
-├── cli/        # Command-line interface
-├── config/     # Configuration management
-├── core/       # Core Bitcoin integration
-├── crawlers/   # Data collection services
-├── wallet/     # Wallet management
-├── web/        # Web dashboard
-└── tests/      # Test suites
+
+2. Set up environment variables:
+```bash
+export BITCOIN_RPC_URL="http://localhost:8332"
+export BITCOIN_NETWORK="mainnet"
+export ML_MODEL_PATH="/path/to/models"
 ```
 
-## Getting Started
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/botshelomokoka/dash33.git
-   cd dash33
-   ```
-2. Install dependencies:
-   ```bash
-   pip install -r requirements.txt
-   ```
-3. Configure your environment variables (copy and edit the example):
-   ```bash
-   cp .env.example .env
-   ```
-4. Run the web dashboard:
-   ```bash
-   uvicorn web.main:app --reload
-   ```
+3. Run the server:
+```bash
+python -m dash33.web.main
+```
 
-## Goals
-- Deliver enterprise-grade Bitcoin analytics with AI insights
-- Provide secure, scalable wallet integration
-- Enable data-driven financial decision making
-- Foster open-source collaboration in crypto-finance
-- Make advanced financial intelligence accessible to all users
+## Development
+
+### Testing
+Run the test suite:
+```bash
+pytest tests/
+```
+
+### Performance Testing
+Run performance benchmarks:
+```bash
+python scripts/benchmark.py
+```
+
+## Documentation
+
+Full documentation is available at [https://botshelomokoka.github.io/dash33](https://botshelomokoka.github.io/dash33)
 
 ## Contributing
-We welcome contributions! Please feel free to submit a Pull Request. For major changes, please open an issue first to discuss what you would like to change.
+
+Please read [CONTRIBUTING.md](CONTRIBUTING.md) for details on our code of conduct and development process.
+
+## License
+
+This project is licensed under the MIT License - see [LICENSE](LICENSE) for details.
