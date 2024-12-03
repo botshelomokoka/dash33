@@ -1,0 +1,25 @@
+[package]
+name = "dash33"
+version.workspace = true
+edition.workspace = true
+description = "AI-powered Bitcoin dashboard and analytics platform"
+authors.workspace = true
+license.workspace = true
+
+[dependencies]
+# Core Dependencies
+bitcoin = { workspace = true }
+serde = { workspace = true }
+tokio = { workspace = true }
+
+# Analytics and ML
+ndarray = "0.15.6"
+plotters = "0.3.5"
+
+[lib]
+name = "dash33"
+path = "src/lib.rs"
+
+[features]
+default = []
+advanced-analytics = []
