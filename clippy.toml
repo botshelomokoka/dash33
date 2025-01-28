@@ -1,0 +1,7 @@
+cognitive-complexity-threshold = 25
+too-many-arguments-threshold = 7
+type-complexity-threshold = 250
+enum-variant-size-threshold = 200
+doc-valid-idents = ["AI", "IDE"]
+msrv = "1.70.0"
+allow-unwrap-in-tests = true
