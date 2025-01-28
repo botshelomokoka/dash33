@@ -8,6 +8,21 @@
 
 dash33 is a comprehensive Bitcoin intelligence platform that combines advanced AI analytics with secure wallet management. It provides real-time insights, transaction analysis, and portfolio optimization through a modern, secure interface.
 
+## Repository Structure
+
+```
+dash33/
+├── platforms/           # Platform-specific implementations
+│   ├── dart/           # Dart package implementation
+│   └── mobile/         # Mobile service integration
+├── integrations/        # Integration components
+│   ├── enterprise/     # Enterprise-specific features
+│   └── web5/          # Web5 integration components
+├── ai/                 # AI/ML components
+├── core/              # Core platform features
+└── wallet/            # Wallet management
+```
+
 ## Features
 
 ### AI Analytics
@@ -27,6 +42,28 @@ dash33 is a comprehensive Bitcoin intelligence platform that combines advanced A
 - DDoS protection
 - Rate limiting
 - Secure API endpoints
+
+### Platform Support
+
+#### Dart Implementation
+The Dart package provides:
+- Native Flutter integration
+- Cross-platform compatibility
+- Optimized mobile performance
+- Real-time updates
+
+#### Mobile Service
+Mobile-specific features include:
+- Native platform integration
+- Biometric security
+- Offline capabilities
+- Push notifications
+
+### Web5 Integration
+- Decentralized identity (DID)
+- Verifiable credentials
+- Data sovereignty
+- IPFS integration
 
 ## Performance Optimizations
 
@@ -49,40 +86,36 @@ dash33 is a comprehensive Bitcoin intelligence platform that combines advanced A
 pip install -r requirements.txt
 ```
 
-2. Set up environment variables:
+2. Platform-specific setup:
+
+### Python
 ```bash
-export BITCOIN_RPC_URL="http://localhost:8332"
-export BITCOIN_NETWORK="mainnet"
-export ML_MODEL_PATH="/path/to/models"
+python -m dash33
 ```
 
-3. Run the server:
+### Dart
 ```bash
-python -m dash33.web.main
+cd platforms/dart
+flutter pub get
 ```
 
-## Development
-
-### Testing
-Run the test suite:
+### Mobile
 ```bash
-pytest tests/
-```
-
-### Performance Testing
-Run performance benchmarks:
-```bash
-python scripts/benchmark.py
+cd platforms/mobile
+flutter run
 ```
 
 ## Documentation
 
-Full documentation is available at [https://botshelomokoka.github.io/dash33](https://botshelomokoka.github.io/dash33)
+- [Core Documentation](https://botshelomokoka.github.io/dash33)
+- [API Reference](https://botshelomokoka.github.io/dash33/api)
+- [Platform Guides](https://botshelomokoka.github.io/dash33/platforms)
+- [Integration Guide](https://botshelomokoka.github.io/dash33/integration)
 
 ## Contributing
 
-Please read [CONTRIBUTING.md](CONTRIBUTING.md) for details on our code of conduct and development process.
+Please read our [Contributing Guide](CONTRIBUTING.md) for details on our code of conduct and development process.
 
 ## License
 
-This project is licensed under the MIT License - see [LICENSE](LICENSE) for details.
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
