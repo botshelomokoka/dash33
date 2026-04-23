@@ -1,7 +1,7 @@
 # Core dependencies
 python-bitcoinlib==0.11.0
 httpx==0.24.0
-requests==2.32.4
+requests==2.33.0
 numpy==1.24.3
 pandas==2.0.3
 
@@ -11,12 +11,12 @@ uvicorn==0.15.0
 gunicorn==23.0.0
 jinja2==3.1.5
 aiofiles==0.7.0
-python-multipart==0.0.18
+python-multipart==0.0.26
 
 # ML dependencies
-torch==2.7.1
+torch==2.8.0
 scikit-learn==1.5.1
-transformers==4.51.0
+transformers==5.0.0rc3
 
 # Monitoring and metrics
 prometheus-client==0.17.1
